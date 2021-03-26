@@ -26,3 +26,5 @@ jobs:
       run: dotnet pack --configuration Release AlloUI/AlloUI.csproj
     - name: Publish the package to Azure Artifacts
       run: dotnet nuget push AlloUI/bin/Release/*.nupkg
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_TOKEN}} # Note, create a secret with this name in Settings
