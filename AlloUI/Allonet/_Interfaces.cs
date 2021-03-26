@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace Allonet
+namespace AlloUI
 {
     [StructLayout(LayoutKind.Sequential)]
     struct _AlloClient

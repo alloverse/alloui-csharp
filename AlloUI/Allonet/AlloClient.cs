@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Spatial.Euclidean;
 
-namespace Allonet
+namespace AlloUI
 {
     public class AlloIdentity
     {

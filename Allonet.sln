@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allonet", "Allonet\Allonet.csproj", "{B904E1A2-A183-4BB0-B47D-C7DF0A53A695}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlloUI", "AlloUI\AlloUI.csproj", "{B904E1A2-A183-4BB0-B47D-C7DF0A53A695}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppSample", "AppSample\AppSample.csproj", "{92BB3190-AFEB-447E-884E-48EA754D2DED}"
 EndProject

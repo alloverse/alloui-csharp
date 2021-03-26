@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Spatial.Euclidean;
 
-namespace Allonet
+namespace AlloUI
 {
     public class AlloEntity
     {

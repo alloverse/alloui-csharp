@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Allonet\Allonet.csproj" />
+    <ProjectReference Include="..\AlloUI\AlloUI.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
