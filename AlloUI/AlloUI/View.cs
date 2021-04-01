@@ -82,7 +82,23 @@ namespace AlloUI
             );
         }
 
-        
+        /// Asks the backend to update the components representing this view for everybody on the server.
+        /// Use this to update things you've specified in :specification() but now want to change.
+        /// comps: A struct of the desired changes
+        public void UpdateComponents(AlloComponents comps)
+        {
+            Debug.Assert(this.IsAwake);
+            var body = new List<object>{
+                "change_components",
+                this.Entity.id,
+                "add_or_change",
+                comps,
+                "remove",
+                new List<string>()
+            };
+            app.client.InteractRequest(this.Entity.id, "place", body, null);
+        }
+
         public App app
         {
             get => _app;
