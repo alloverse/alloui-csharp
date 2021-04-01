@@ -130,7 +130,7 @@ namespace AlloUI
             get => this.Entity != null;
         }
 
-        public void OnInteraction(string type, List<object> body, AlloEntity sender)
+        public virtual void OnInteraction(string type, List<object> body, AlloEntity sender)
         {
 
         }
