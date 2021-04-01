@@ -17,7 +17,7 @@ namespace AlloUI
         public bool IsGrabbable;
 
         /// Override this to describe how your view is represented in the world
-        public EntitySpecification Specification()
+        public virtual EntitySpecification Specification()
         {
             EntitySpecification spec = new EntitySpecification();
 
