@@ -246,7 +246,6 @@ namespace AlloUI
             GCHandle backref = (GCHandle)_client->_backref;
             AlloClient self = backref.Target as AlloClient;
 
-            Debug.WriteLine("Incoming " + type + " interaction alloclient: " + from + " > " + to + ": " + cmd + ";");
             List<object> data = Deserialize<List<object>>(cmd);
 
             if(from == "place" && data[0].ToString() == "announce")
