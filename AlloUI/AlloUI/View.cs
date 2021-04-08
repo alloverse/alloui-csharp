@@ -104,10 +104,10 @@ namespace AlloUI
             get => _app;
             set
             {
-                _app = app;
+                _app = value;
                 foreach(View child in Subviews) 
                 {
-                    child.app = app;
+                    child.app = value;
                 }
             }
         }
