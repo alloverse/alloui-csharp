@@ -81,6 +81,7 @@ namespace AlloUI
         void routeInteraction(string type, AlloEntity sender, AlloEntity receiver, List<object> body)
         {
             if(receiver == null) return;
+            if(receiver.components.ui == null) return;
             string vid = receiver.components.ui.view_id;
             View view = this.FindView(vid);
             if(view != null)
