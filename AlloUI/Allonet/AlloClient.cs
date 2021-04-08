@@ -180,7 +180,7 @@ namespace AlloUI
                     }
                     incomingEntityIds.Add(entityId);
                     IntPtr componentsJsonPtr = _AlloClient.cJSON_Print(entry->components);
-                    string componentsJson = Marshal.PtrToStringAuto(componentsJsonPtr);
+                    string componentsJson = Marshal.PtrToStringAnsi(componentsJsonPtr);
                     entity.components = Deserialize<AlloComponents>(componentsJson);
                     _AlloClient.allo_free(componentsJsonPtr);
                     entry = entry->le_next;
