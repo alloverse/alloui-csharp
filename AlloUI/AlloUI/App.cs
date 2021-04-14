@@ -48,11 +48,19 @@ namespace AlloUI
 
         public void Run(int hz)
         {
+            Console.CancelKeyPress += new ConsoleCancelEventHandler(delegate(object sender, ConsoleCancelEventArgs args)
+            {
+                Debug.WriteLine("Interrupted!");
+                running = false;
+                args.Cancel = true;
+            });
             double timeout = 1/(double)hz;
             while(running)
             {
                 client.Poll(timeout);
             }
+            Debug.WriteLine("Exiting...");
+            client.Disconnect(0);
         }
 
         public void AddRootView(View view)
