@@ -55,12 +55,15 @@ namespace AlloUI
                 args.Cancel = true;
             });
             double timeout = 1/(double)hz;
-            while(running)
-            {
-                client.Poll(timeout);
+            try {
+                while(running)
+                {
+                    client.Poll(timeout);
+                }
+            } finally {
+                Debug.WriteLine("Exiting...");
+                client.Disconnect(0);
             }
-            Debug.WriteLine("Exiting...");
-            client.Disconnect(0);
         }
 
         public void AddRootView(View view)
