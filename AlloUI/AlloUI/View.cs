@@ -23,10 +23,8 @@ namespace AlloUI
         public View()
         {
         }
-        public View(Bounds bounds)
-        {
-            Bounds = bounds;
-        }
+
+        public virtual void Layout() {}
 
         /// Override this to describe how your view is represented in the world
         public virtual EntitySpecification Specification()
@@ -88,6 +86,7 @@ namespace AlloUI
         public void Spawn()
         {
             Debug.Assert(Superview != null && Superview.IsAwake);
+            Layout();
             EntitySpecification spec = Specification();
             app.client.InteractRequest(
                 Superview.Entity.id,
@@ -126,7 +125,7 @@ namespace AlloUI
             AlloComponents spec = this.Specification().components;
             foreach(string key in keys)
             {
-                PropertyInfo prop = typeof(AlloComponents).GetProperty(key);
+                FieldInfo prop = typeof(AlloComponents).GetField(key);
                 prop.SetValue(dirty, prop.GetValue(spec));
             }
             UpdateComponents(dirty);

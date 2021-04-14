@@ -28,6 +28,11 @@ namespace AlloUI
         public static Color FullBlue { get { return new Color(0, 0, 1, 1); } }
         public static Color Purple { get { return new Color(0.5, 0, 0.5, 1); } }
 
+        static Random seeder = new Random();
+        public static Color Random()
+        {
+            return new Color(seeder.NextDouble(), seeder.NextDouble(), seeder.NextDouble(), 1.0);
+        }
         public List<double> AsList { 
             get {
                 return new List<double>{Red, Green, Blue, Alpha};

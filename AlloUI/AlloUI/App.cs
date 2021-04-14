@@ -31,6 +31,7 @@ namespace AlloUI
             AlloIdentity identity = new AlloIdentity();
             identity.display_name = this.appName;
 
+            this.mainView.Layout();
             EntitySpecification mainViewSpec = this.mainView.Specification();
 
             this.client.Connect(url, identity, mainViewSpec);
@@ -72,6 +73,7 @@ namespace AlloUI
             if(this.client.connected)
             {
                 view.app = this;
+                view.Layout();
                 this.client.SpawnEntity(view.Specification());
             }
         }

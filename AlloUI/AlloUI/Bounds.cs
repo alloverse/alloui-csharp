@@ -20,6 +20,13 @@ namespace AlloUI
             Height = h;
             Depth = d;
         }
+
+        public Size(Size other)
+        {
+            Width = other.Width;
+            Height = other.Height;
+            Depth = other.Depth;
+        }
     }
 
     public class Bounds
@@ -37,6 +44,17 @@ namespace AlloUI
             Move(x, y, z);
         }
 
+        public Bounds(Bounds other)
+        {
+            Size = new Size(other.Size);
+            Pose = new CoordinateSystem(other.Pose);
+        }
+
+        public Bounds MoveToOrigin()
+        {
+            Pose = new CoordinateSystem(); // not sure if there's a better way to set it to identity...
+            return this;
+        }
         public Bounds Move(double x, double y, double z)
         {
             Pose.Multiply(CoordinateSystem.Translation(new Vector3D(x, y, z)), Pose);

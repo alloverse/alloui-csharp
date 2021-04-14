@@ -58,6 +58,9 @@ namespace AlloUI
                 fitToWidth=_fitToWidth
             };
 
+            spec.components.material = new Component.Material();
+            spec.components.material.color = _color.AsList;
+
             return spec;
         }
     }

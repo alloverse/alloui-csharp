@@ -33,9 +33,19 @@ class SampleApp
         Label label = cube.addSubview(new Label{
             Bounds= new Bounds {
                 Size= new Size(cube.Bounds.Size.Width, 0.1, 0.01)
-            }.Move(0, cube.Bounds.Size.Height/2 - 0.12, cube.Bounds.Size.Depth/1.9),
+            }.Move(0, cube.Bounds.Size.Height/2 - 0.12, cube.Bounds.Size.Depth/2.0),
             Text= "Hello World!"
         });
+
+        Button button = cube.addSubview(new Button{
+            Bounds= new Bounds {
+                Size= new Size(0.6, 0.13, 0.1)
+            }.Move(0, 0, cube.Bounds.Size.Depth/2.0 + 0.05),
+        });
+        button.Label.Text = "Do the thing";
+        button.Action += delegate(object sender, Button.ActionArgs args) {
+            button.Cube.Color = Color.Random();
+        };
 
         cube.IsGrabbable = true;
         return cube;
