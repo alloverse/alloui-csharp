@@ -27,11 +27,15 @@ namespace AlloUI
             Size s = Bounds.Size;
             double w2 = s.Width / 2.0;
             double h2 = s.Height / 2.0;
-            //              #bl                   #br                  #tl                   #tr
-            geom.vertices= new List<List<double>> { new List<double> {-w2, -h2, 0.0}, new List<double> {w2, -h2, 0.0}, new List<double> {-w2, h2, 0.0},  new List<double> {w2, h2, 0.0}};
-            geom.uvs=      new List<List<double>> { new List<double> {0.0, 0.0},      new List<double> {1.0, 0.0},     new List<double> {0.0, 1.0},      new List<double> {1.0, 1.0}};
-            geom.triangles= new List<List<int>> {new List<int> {0, 1, 3}, new List<int> {0, 3, 2}, new List<int> {1, 0, 2}, new List<int> {1, 2, 3}};
-            
+            int bl = geom.AddVertexUV(-w2, -h2, 0.0,   0.0, 0.0);
+            int br = geom.AddVertexUV( w2, -h2, 0.0,   1.0, 0.0);
+            int tl = geom.AddVertexUV(-w2,  h2, 0.0,   0.0, 1.0);
+            int tr = geom.AddVertexUV( w2,  h2, 0.0,   1.0, 1.0);
+            geom.AddTriangle(bl, br, tr);
+            geom.AddTriangle(bl, tr, tl);
+            geom.AddTriangle(br, bl, tl);
+            geom.AddTriangle(br, tl, tr);
+
             spec.components.geometry = geom;
 
             if(Color != null) {

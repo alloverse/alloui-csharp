@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -54,10 +55,33 @@ namespace AlloUI
         {
             override public string type { get { return "inline"; } }
             public string name;
-            public List<List<double>> vertices; // vec3
+            public List<List<double>> vertices = new List<List<double>>(); // vec3
             public List<List<double>> normals; // vec3
             public List<List<double>> uvs; // vec2
-            public List<List<int>> triangles; // vec3 of indices
+            public List<List<int>> triangles = new List<List<int>>(); // vec3 of indices
+
+            public int AddVertex(double x, double y, double z)
+            {
+                vertices.Add(new List<double>{x, y, z});
+                return vertices.Count - 1;
+            }
+            public int AddVertexUV(double x, double y, double z, double u, double v)
+            {
+                AddVertex(x, y, z);
+
+                if(uvs == null)
+                {
+                    uvs = new List<List<double>>();
+                }
+                uvs.Add(new List<double>{u, v});
+
+                Debug.Assert(vertices.Count == uvs.Count);
+                return vertices.Count - 1;
+            }
+            public void AddTriangle(int a, int b, int c)
+            {
+                triangles.Add(new List<int>{a, b, c});
+            }
         }
 
         abstract public class Collider
