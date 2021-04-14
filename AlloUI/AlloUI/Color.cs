@@ -21,6 +21,12 @@ namespace AlloUI
             Blue = b;
             Alpha = a;
         }
+        public static Color White { get { return new Color(1, 1, 1, 1); } }
+        public static Color Black { get { return new Color(0, 0, 0, 1); } }
+        public static Color FullRed { get { return new Color(1, 0, 0, 1); } }
+        public static Color FullGreen { get { return new Color(0, 1, 0, 1); } }
+        public static Color FullBlue { get { return new Color(0, 0, 1, 1); } }
+        public static Color Purple { get { return new Color(0.5, 0, 0.5, 1); } }
 
         public List<double> AsList { 
             get {

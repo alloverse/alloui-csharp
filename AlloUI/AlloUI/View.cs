@@ -70,7 +70,7 @@ namespace AlloUI
             return null;
         }
 
-        public View addSubview(View subview)
+        public T addSubview<T>(T subview) where T : View
         {
             Debug.Assert(subview.Superview == null);
 

@@ -41,7 +41,7 @@ namespace AlloUI
             geom.AddTriangle(fbr, rtr, ftr); geom.AddTriangle(rbr, rtr, fbr); // right
             geom.AddTriangle(rbr, fbr, fbl); geom.AddTriangle(rbl, rbr, fbl); // bottom
             geom.AddTriangle(rbl, fbl, ftl); geom.AddTriangle(rbl, ftl, rtl); // left
-            geom.AddTriangle(rbl, rtl, rbr); geom.AddTriangle(rbr, rtl, rtr); // read
+            geom.AddTriangle(rbl, rtl, rbr); geom.AddTriangle(rbr, rtl, rtr); // rear
      
             spec.components.geometry = geom;
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Spatial.Euclidean;
+using Newtonsoft.Json;
 
 namespace AlloUI
 {
@@ -23,6 +24,7 @@ namespace AlloUI
         public Component.Collider collider;
         public Component.Relationships relationships;
         public Component.Grabbable grabbable;
+        public Component.Text text;
     }
 
     namespace Component 
@@ -132,6 +134,17 @@ namespace AlloUI
             public string actuate_on;
             public List<int> translation_constraint;
             public List<int> rotation_constraint;
+        }
+
+        public class Text
+        {
+            [JsonProperty("string")]
+            public string text;
+            public double height;
+            public double wrap;
+            public string halign;
+            public double fitToWidth;
+            public bool insertionMarker;
         }
     }
 }

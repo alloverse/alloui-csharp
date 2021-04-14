@@ -24,14 +24,20 @@ class SampleApp
 
     View MakeMainUI()
     {
-        View root = new Cube{
+        Cube cube = new Cube{
             Bounds= new Bounds{
                 Size= new Size(1.0, 1.0, 0.10)
             }.Move(0, 1.5, 0),
             Color= new Color(0.6, 0.4, 0, 1)
         };
+        Label label = cube.addSubview(new Label{
+            Bounds= new Bounds {
+                Size= new Size(cube.Bounds.Size.Width, 0.1, 0.01)
+            }.Move(0, cube.Bounds.Size.Height/2 - 0.12, cube.Bounds.Size.Depth/1.9),
+            Text= "Hello World!"
+        });
 
-        root.IsGrabbable = true;
-        return root;
+        cube.IsGrabbable = true;
+        return cube;
     }
 }
