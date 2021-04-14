@@ -24,8 +24,14 @@ class SampleApp
 
     View MakeMainUI()
     {
-        View root = new View();
-        root.Bounds.Move(0, 0, 1.5);
+        Surface root = new Surface{
+            Bounds= new Bounds{
+                Size= new Size(1.0, 1.0, 0.05)
+            }.Move(0, 1.5, 0),
+            Color= new Color(1, 0, 0, 1)
+        };
+        root.Color = new Color(0, 1, 0, 1);
+
         root.IsGrabbable = true;
         return root;
     }

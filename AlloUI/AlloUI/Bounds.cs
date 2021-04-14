@@ -13,13 +13,22 @@ namespace AlloUI
         public double Width = 1.0;
         public double Height = 1.0;
         public double Depth = 1.0;
+        public Size() {}
+        public Size(double w, double h, double d)
+        {
+            Width = w;
+            Height = h;
+            Depth = d;
+        }
     }
 
     public class Bounds
     {
         public Size Size = new Size();
         public CoordinateSystem Pose = new CoordinateSystem();
-
+        public Bounds()
+        {
+        }
         public Bounds(double x, double y, double z, double w, double h, double d)
         {
             Size.Width = w;

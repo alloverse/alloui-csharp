@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace AlloUI
 {
@@ -15,6 +16,14 @@ namespace AlloUI
         private App _app;
         public AlloEntity Entity {get; internal set;} = null;
         public bool IsGrabbable;
+
+        public View()
+        {
+        }
+        public View(Bounds bounds)
+        {
+            Bounds = bounds;
+        }
 
         /// Override this to describe how your view is represented in the world
         public virtual EntitySpecification Specification()
@@ -97,6 +106,24 @@ namespace AlloUI
                 new List<string>()
             };
             app.client.InteractRequest(this.Entity.id, "place", body, null);
+        }
+
+        /// Mark one or more Components as needing to have their server-side value updated ASAP.
+        public void MarkAsDirty(params string[] keys)
+        {
+            // everything is implicitly dirty and will be updated when View is Awakened
+            if(!IsAwake)
+            {
+                return;
+            }
+            AlloComponents dirty = new AlloComponents();
+            AlloComponents spec = this.Specification().components;
+            foreach(string key in keys)
+            {
+                PropertyInfo prop = typeof(AlloComponents).GetProperty(key);
+                prop.SetValue(dirty, prop.GetValue(spec));
+            }
+            UpdateComponents(dirty);
         }
 
         public App app

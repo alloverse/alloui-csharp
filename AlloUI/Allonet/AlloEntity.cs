@@ -79,8 +79,8 @@ namespace AlloUI
 
         public class Material
         {
-            public List<double> color; // vec4 rgba
-            public string shader_name;
+            public List<double> color = null; // vec4 rgba
+            public string shader_name = null;
         }
 
         public class UI
