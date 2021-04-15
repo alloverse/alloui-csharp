@@ -36,7 +36,7 @@ namespace AlloUI
         /// <summary>
         /// The current value of the stepper.
         /// </summary>
-        public int CurrentValue { private get; set; }
+        public int CurrentValue { get; private set; }
 
         /// <summary>
         /// Size of the component
