@@ -53,11 +53,11 @@ namespace AlloUI
         public override void Layout()
         {
             Cube.Bounds.Size = new Size(Bounds.Size);
-            Debug.WriteLine($"{IsSelected}, {IsHighlighted}");
+            Cube.Bounds.MoveToOrigin();
             if(IsSelected && IsHighlighted)
             {
                 Cube.Bounds.Size.Depth = 0.01;
-                Cube.Bounds.MoveToOrigin().Move(0, 0, -Bounds.Size.Depth/2);
+                Cube.Bounds.Move(0, 0, -Bounds.Size.Depth/2);
             }
             Label.Bounds.Size = new Size(Bounds.Size);
             Label.Bounds.Size.Width *= 0.9;

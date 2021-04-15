@@ -299,7 +299,7 @@ namespace AlloUI
             pointer.PointedFrom = new Point3D(from[0], from[1], from[2]);
             pointer.PointedTo = new Point3D(from[0], from[1], from[2]);
 
-            if(pointer.State == PointerState._Undetermined)
+            if(pointer.State == PointerState._Undetermined || pointer.State == PointerState.Outside)
             {
                 pointer.State = PointerState.Hovering;
                 OnPointerEntered(pointer);
