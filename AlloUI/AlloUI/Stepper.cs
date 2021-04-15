@@ -41,7 +41,7 @@ namespace AlloUI
         /// <summary>
         /// Size of the component
         /// </summary>
-        public double Size { get; set; }
+        public double Size { get; private set; }
 
         /// <summary>
         /// Constructs a stepper component given a size (height) of the
