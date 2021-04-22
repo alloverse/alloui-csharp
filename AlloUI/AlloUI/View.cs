@@ -162,6 +162,30 @@ namespace AlloUI
             get => this.Entity != null;
         }
 
+        public CoordinateSystem TransformFromParent()
+        {
+            if(!IsAwake) 
+                return Bounds.Pose;
+            return Entity.components.transform.matrix;
+        }
+
+        public CoordinateSystem TransformFromWorld()
+        {
+            if(Superview == null)
+                return TransformFromParent();
+            return new CoordinateSystem(Superview.TransformFromWorld().Multiply(TransformFromParent()));
+        }
+
+        // other=null means from global coordinate space
+        public Point3D ConvertPointFromView(Point3D point, View other)
+        {
+            CoordinateSystem worldFromOther = (other != null) ? other.TransformFromWorld().Invert() : new CoordinateSystem();
+            CoordinateSystem selfFromWorld = TransformFromWorld();
+            Point3D pointInWorld = worldFromOther.Transform(point);
+            Point3D pointInLocal = selfFromWorld.Transform(pointInWorld);
+            return pointInLocal;
+        }
+
         /// Callback called when a user grabs this view in order to move it.
         ///  The server will then update Entity.components.transform to match
         ///  where the user wants to move it continuously. There is no callback for
