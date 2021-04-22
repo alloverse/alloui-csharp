@@ -27,7 +27,7 @@ class SampleApp
         Cube cube = new Cube{
             Bounds= new Bounds{
                 Size= new Size(1.0, 1.0, 0.10)
-            }.Move(0, 1.5, 0),
+            }.Move(0, 1.5, -2),
             Color= new Color(0.6, 0.4, 0, 1)
         };
         Label label = cube.addSubview(new Label{
@@ -45,6 +45,15 @@ class SampleApp
         button.Label.Text = "Do the thing";
         button.Action += delegate(object sender, Button.ActionArgs args) {
             button.Cube.Color = Color.Random();
+        };
+
+        Slider slider = cube.addSubview(new Slider{
+            Bounds= new Bounds {
+                Size= new Size(0.8, 0.13, 0.1)
+            }.Move(0, -0.3, cube.Bounds.Size.Depth/2.0 + 0.05),
+        });
+        slider.Action += delegate(object sender, Slider.ActionArgs args) {
+            label.Text = $"{args.Value}";
         };
 
         cube.IsGrabbable = true;
