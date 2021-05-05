@@ -73,8 +73,6 @@ namespace AlloUI
             Point3D localPoint = ConvertPointFromView(pointer.PointedTo ?? new Point3D(0,0,0), null);
             double fraction = (localPoint.X + Bounds.Size.Width/2) / Bounds.Size.Width;
 
-            Debug.WriteLine($"{localPoint}, {fraction}");
-
             if(fraction < 0 || fraction > 1) return;
             
             double newValue = _minValue + (fraction * (_maxValue - _minValue));

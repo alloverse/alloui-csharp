@@ -319,7 +319,7 @@ namespace AlloUI
             var from = (body[1] as JArray).ToObject<List<double>>();
             var to = (body[2] as JArray).ToObject<List<double>>();
             pointer.PointedFrom = new Point3D(from[0], from[1], from[2]);
-            pointer.PointedTo = new Point3D(from[0], from[1], from[2]);
+            pointer.PointedTo = new Point3D(to[0], to[1], to[2]);
 
             if(pointer.State == PointerState._Undetermined || pointer.State == PointerState.Outside)
             {
