@@ -49,7 +49,7 @@ namespace AlloUI
             Knob.Bounds.Size = new Size(Bounds.Size);
             Knob.Bounds.Size.Width = Knob.Bounds.Size.Height;
             double fraction = (_currentValue - _minValue) / (_maxValue - _minValue);
-            Debug.WriteLine($"{_currentValue} - {_minValue} / ({_maxValue} - {_minValue}) = {fraction}");
+            //Debug.WriteLine($"{_currentValue} - {_minValue} / ({_maxValue} - {_minValue}) = {fraction}");
             double x = fraction * Bounds.Size.Width - Bounds.Size.Width/2;
             Knob.Bounds.MoveToOrigin().Move(x, 0, 0);
 
@@ -73,10 +73,12 @@ namespace AlloUI
             Point3D localPoint = ConvertPointFromView(pointer.PointedTo ?? new Point3D(0,0,0), null);
             double fraction = (localPoint.X + Bounds.Size.Width/2) / Bounds.Size.Width;
 
+            Debug.WriteLine($"{localPoint}, {fraction}");
+
             if(fraction < 0 || fraction > 1) return;
             
             double newValue = _minValue + (fraction * (_maxValue - _minValue));
-            Debug.WriteLine($"{localPoint} -> {fraction} -> {newValue}");
+            
             CurrentValue = newValue;
             Activate(pointer.Hand, newValue);
         }
