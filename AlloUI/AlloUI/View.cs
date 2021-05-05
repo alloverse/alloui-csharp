@@ -325,7 +325,7 @@ namespace AlloUI
 
             if(pointer.State == PointerState._Undetermined || pointer.State == PointerState.Outside)
             {
-                pointer.State = PointerState.Hovering;
+                pointer.State = pointer.PokeOngoing ? PointerState.Touching : PointerState.Hovering;
                 OnPointerEntered(pointer);
             } 
             else
@@ -360,6 +360,7 @@ namespace AlloUI
             if((body[1] as bool?).GetValueOrDefault())
             {
                 pointer.State = PointerState.Touching;
+                pointer.PokeOngoing = true;
                 OnTouchDown(pointer);
             } 
             else 
@@ -373,6 +374,7 @@ namespace AlloUI
                     pointer.State = PointerState.Outside;
                     _pointers.Remove(sender.id);
                 }
+                pointer.PokeOngoing = false;
                 OnTouchUp(pointer);
             }
             OnPointerChanged(pointer);
@@ -390,6 +392,9 @@ namespace AlloUI
         public Point3D? PointedFrom { internal set; get; }
         /// Where in world space is the ray cast from the finger hitting this view?
         public Point3D? PointedTo { internal set; get; }
+        
+
+        internal Boolean PokeOngoing { set; get; }
     }
 
     public enum PointerState {
