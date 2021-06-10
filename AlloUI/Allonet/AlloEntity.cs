@@ -141,9 +141,9 @@ namespace AlloUI
             [JsonProperty("string")]
             public string text;
             public double height;
-            public double wrap;
+            public bool wrap;
             public string halign;
-            public double fitToWidth;
+            public bool fitToWidth;
             public bool insertionMarker;
         }
     }

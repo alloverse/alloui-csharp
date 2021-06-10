@@ -30,8 +30,8 @@ namespace AlloUI
             get { return _lineHeight; }
             set { _lineHeight = value; MarkAsDirty("text"); }
         }
-        private double _wrap;
-        public double Wrap {
+        private bool _wrap;
+        public bool Wrap {
             get { return _wrap; }
             set { _wrap = value; MarkAsDirty("text"); }
         }
@@ -40,8 +40,8 @@ namespace AlloUI
             get { return _halign; }
             set { _halign = value; MarkAsDirty("text"); }
         }
-        private double _fitToWidth;
-        public double FitToWidth {
+        private bool _fitToWidth;
+        public bool FitToWidth {
             get { return _fitToWidth; }
             set { _fitToWidth = value; MarkAsDirty("text"); }
         }
@@ -53,8 +53,8 @@ namespace AlloUI
             spec.components.text = new Component.Text{
                 text=_text,
                 height= _lineHeight > 0 ? _lineHeight : Bounds.Size.Height,
-                wrap=_wrap > 0 ? _wrap : Bounds.Size.Width,
-                halign=_halign.Value,
+                wrap = _wrap,
+                halign = _halign.Value,
                 fitToWidth=_fitToWidth
             };
 
