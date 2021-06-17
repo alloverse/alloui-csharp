@@ -99,7 +99,8 @@ namespace AlloUI
         /// Asks the backend to update the components representing this view for everybody on the server.
         /// Use this to update things you've specified in :specification() but now want to change.
         /// comps: A struct of the desired changes
-        public void UpdateComponents(AlloComponents comps)
+        /// keysToSend: Only the keys in this list will be sent. null or empty list = send all keys.
+        public void UpdateComponents(AlloComponents comps, params string[] keysToSend)
         {
             Debug.Assert(this.IsAwake);
             var body = new List<object>{
@@ -110,6 +111,22 @@ namespace AlloUI
                 "remove",
                 new List<string>()
             };
+            object dirty;
+            if(keysToSend != null && keysToSend.Length > 0)
+            {
+                Dictionary<object,object> dirtycomps = new Dictionary<object,object>();
+                dirty = dirtycomps;
+                foreach(string key in keysToSend)
+                {
+                    FieldInfo prop = typeof(AlloComponents).GetField(key);
+                    dirtycomps.Add(key, prop.GetValue(comps));
+                }
+            } 
+            else 
+            {
+                dirty = comps;
+            }
+            
             app.client.InteractRequest(this.Entity.id, "place", body, null);
         }
 
@@ -121,14 +138,7 @@ namespace AlloUI
             {
                 return;
             }
-            AlloComponents dirty = new AlloComponents();
-            AlloComponents spec = this.Specification().components;
-            foreach(string key in keys)
-            {
-                FieldInfo prop = typeof(AlloComponents).GetField(key);
-                prop.SetValue(dirty, prop.GetValue(spec));
-            }
-            UpdateComponents(dirty);
+            UpdateComponents(Specification().components, keys);
         }
 
         public App app

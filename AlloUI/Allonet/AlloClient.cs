@@ -146,10 +146,13 @@ namespace AlloUI
         }
         public void InteractRequest(string senderEntityId, string receiverEntityId, List<object> bodyO, ResponseCallback callback)
         {
+            InteractRequest(senderEntityId, receiverEntityId, Serialize(bodyO), callback);
+        }
+        public void InteractRequest(string senderEntityId, string receiverEntityId, string bodyS, ResponseCallback callback)
+        {
             string requestId = System.Guid.NewGuid().ToString();
             responseCallbacks[requestId] = callback;
-            string body = Serialize(bodyO);
-            _Interact("request", senderEntityId, receiverEntityId, requestId, body);
+            _Interact("request", senderEntityId, receiverEntityId, requestId, bodyS);
         }
 
         public void Poll(double timeout)

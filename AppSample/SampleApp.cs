@@ -28,7 +28,7 @@ class SampleApp
             Bounds= new Bounds{
                 Size= new Size(1.0, 1.0, 0.10)
             }.Move(0, 1.5, -2),
-            Color= new Color(0.6, 0.4, 0, 1)
+            Color= new Color(0.9, 0.7, 0.9, 1)
         };
         Label label = cube.addSubview(new Label{
             Bounds= new Bounds {
