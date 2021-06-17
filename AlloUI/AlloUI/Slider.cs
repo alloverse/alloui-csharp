@@ -61,34 +61,61 @@ namespace AlloUI
         {
             public AlloEntity Sender { get; internal set; }
             public double Value { get; internal set; }
+
+            // if this is true, more values will come in as the slider is dragged by
+            // the user. When the user releases, this becomes false.
+            public Boolean IsInteractive { get; internal set; }
         }
         public event EventHandler<ActionArgs> Action;
-        public void Activate(AlloEntity sender, double value)
-        {
-            Action?.Invoke(this, new ActionArgs { Sender = sender, Value = value });
-        }
 
-        override public void OnTouchDown(Pointer pointer)
+
+        private void Activate(Pointer pointer, Boolean IsInteractive)
         {
             Point3D localPoint = ConvertPointFromView(pointer.PointedTo ?? new Point3D(0,0,0), null);
             double fraction = (localPoint.X + Bounds.Size.Width/2) / Bounds.Size.Width;
 
-            if(fraction < 0 || fraction > 1) return;
+            if(fraction < 0 || fraction > 1)
+            {
+                if(!IsInteractive)
+                {
+                    // don't send continuous interactive events for outside-drags,
+                    // but always finish off a OnTouchUp
+                    Action?.Invoke(this, new ActionArgs { 
+                        Sender = pointer.Hand, 
+                        Value = CurrentValue,
+                        IsInteractive = false 
+                    });
+                }
+                return;
+            }
             
             double newValue = _minValue + (fraction * (_maxValue - _minValue));
             
             CurrentValue = newValue;
-            Activate(pointer.Hand, newValue);
+            Action?.Invoke(this, new ActionArgs { 
+                Sender = pointer.Hand, 
+                Value = newValue,
+                IsInteractive = IsInteractive 
+            });
+        }
+
+        override public void OnTouchDown(Pointer pointer)
+        {
+            Activate(pointer, true);
         }
 
         override public void OnPointerMoved(Pointer pointer)
         {
             if(pointer.State == PointerState.Touching)
             {
-                OnTouchDown(pointer);
+                Activate(pointer, true);
             }
         }
 
+        override public void OnTouchUp(Pointer pointer)
+        {
+            Activate(pointer, false);
+        }
 
     }
 }
